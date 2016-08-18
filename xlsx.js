@@ -7475,7 +7475,10 @@ return function parse_ws_xml_data(sdata, s, opts, guess) {
       if(opts.cellFormula && (cref=d.match(match_f))!== null) p.f=unescapexml(cref[1]);
 
       if (x.match(/<f.*t="shared"/)) {
-        p.sf = x.match(/<f.*si="([^"]+)"/)[1];
+        var sharedFormulaId = x.match(/<f.*si="([^"]+)"/);
+        if (sharedFormulaId) p.fi = sharedFormulaId[1];
+        var sharedFormulaRef = x.match(/<f.*ref="([^"]+)"/);
+        if (sharedFormulaRef) p.fr = sharedFormulaRef[1];
       }
 
       /* SCHEMA IS ACTUALLY INCORRECT HERE.  IF A CELL HAS NO T, EMIT "" */
