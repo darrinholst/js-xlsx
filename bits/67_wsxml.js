@@ -212,8 +212,8 @@ return function parse_ws_xml_data(sdata, s, opts, guess) {
       if((cref=d.match(match_v))!== null && cref[1] !== '') p.v=unescapexml(cref[1]);
       if(opts.cellFormula && (cref=d.match(match_f))!== null) p.f=unescapexml(cref[1]);
 
-      if (!p.f && x.match(/<f.*t="shared"/)) {
-        p.f = "SHARED";
+      if (x.match(/<f.*t="shared"/)) {
+        p.sf = x.match(/<f.*si="([^"]+)"/)[1];
       }
 
       /* SCHEMA IS ACTUALLY INCORRECT HERE.  IF A CELL HAS NO T, EMIT "" */
